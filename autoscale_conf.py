@@ -1,0 +1,55 @@
+
+import os
+
+vmss_resource_group = "x22179607"
+vmss_name = "solr-vmss"
+
+collection_weights = {'solr-collection-config': 1}
+collections_to_monitor = {'solr-collection-config'}
+
+SOLR_BASE_NODES = ["http://20.197.14.100:8987/"]
+       
+
+SOLR_DOMAIN = "http://20.197.14.100:8987/"
+
+NEW_VM_SOLR_PORT = "8987" #solr admin port
+
+HIGH_SEARCH_RATE_THRESHOLD = 1 #make it 2, query count/ per second
+LOW_SEARCH_RATE_THRESHOLD = 0.9 # make 1.9, 
+
+MAX_MACHINES = 2
+MAX_REPLICAS_PER_NODE = 12
+MIN_REPLICAS_TO_SCALE = 1
+MAX_COLLECTION_REPLICAS_PER_NODE = 2
+MAX_NEW_REPLICAS_IN_AS_VMS = 10
+
+WAIT_AFTER_SOLR_REQUEST_SECS = 20
+
+WAIT_AFTER_NODE_CREATION_SECS = 20
+WAIT_BEFORE_NODE_DELETION_SECS = 5
+WAIT_AFTER_NODE_DELETION_SECS = 5
+
+
+SKIP_KIBANA = True
+KIBANA_RESPONSE_FOR_LAST_MINS_SUGGESTION = 60
+KIBANA_RESPONSE_FOR_LAST_MINS_CLUSTERING = 30
+
+KIBANA_CLUSTERING_KEY = 'clustering'
+KIBANA_SUGGESTION_KEY = 'suggestion'
+
+KIBANA_CLUSTERING_RESPONSE_TIME_LOW_THRESHOLD = 0.15
+KIBANA_CLUSTERING_RESPONSE_TIME_HIGH_THRESHOLD = 0.25
+KIBANA_SUGGESTION_RESPONSE_TIME_LOW_THRESHOLD = 0.15
+KIBANA_SUGGESTION_RESPONSE_TIME_HIGH_THRESHOLD = 0.4
+
+
+LOG_PATH = os.path.join(os.path.expanduser("~"), 'logs/auto_scale_logs/')
+
+ELK_TEST = True
+
+
+try:
+    from autoscale_conf_stage import *
+except:
+    pass
+
